@@ -1,0 +1,13 @@
+logging:
+  level:
+    com:
+      example: TRACE
+spring:
+  datasource:
+    password: password
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=phob
+    username: phob
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
