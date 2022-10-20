@@ -9,7 +9,7 @@ drop table if exists contact;
 
 create table contact (
     contact_id serial primary key,
-    name varchar(20) unique not null,
+    name varchar(20) not null,
     phone varchar(20) not null
 );
 
