@@ -1,4 +1,4 @@
-package com.example.phob;
+package com.example.swdex.phob;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

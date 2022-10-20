@@ -2,8 +2,8 @@
 --
 -- psql -U postgres \i setup.sql
 
-drop schema if exists phob cascade;
-drop user if exists phob;
+drop schema if exists swdex cascade;
+drop user if exists swdex;
 
-create user phob with password 'password';
-create schema authorization phob;
+create user swdex with password 'password';
+create schema authorization swdex;

@@ -1,8 +1,8 @@
--- this script should run on phob
+-- this script should run on swdex
 -- pre requisite: once.sql
 --
--- psql -U phob -d postgres
--- phob=> \i setup.sql
+-- psql -U swdex -d postgres
+-- swdex=> \i setup.sql
 
 -- cleanup
 drop table if exists contact;

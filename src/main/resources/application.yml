@@ -4,9 +4,9 @@ logging:
       example: TRACE
 spring:
   datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=swdex
+    username: swdex
     password: password
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=phob
-    username: phob
   mvc:
     view:
       prefix: /WEB-INF/jsp/

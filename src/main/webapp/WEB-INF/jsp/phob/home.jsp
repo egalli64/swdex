@@ -30,7 +30,7 @@
                         <tr>
                             <td>${contact.name}</td>
                             <td>${contact.phone}</td>
-                            <td><a href="delete?id=${contact.id}" class="btn btn-danger"><i class="bi-trash"></i></a></td>
+                            <td><a href="/phob/delete?id=${contact.id}" class="btn btn-danger"><i class="bi-trash"></i></a></td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -38,7 +38,7 @@
             <div class="col-1"></div>
             <div class="col-3 border border-info p-2">
                 <h2 class="text-center">New Contact</h2>
-                <form action="create">
+                <form action="/phob/create">
                     <div>
                         <label>Name <input name="name" class="form-control" required>
                         </label>

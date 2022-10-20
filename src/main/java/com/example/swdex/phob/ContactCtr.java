@@ -1,4 +1,4 @@
-package com.example.phob;
+package com.example.swdex.phob;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/phob")
 public class ContactCtr {
     private static final Logger log = LogManager.getLogger(ContactCtr.class);
 
@@ -25,7 +25,7 @@ public class ContactCtr {
 
         model.addAttribute("contacts", repo.findAllByOrderByName());
 
-        return "home";
+        return "/phob/home";
     }
 
     @GetMapping("delete")
@@ -34,7 +34,7 @@ public class ContactCtr {
 
         repo.deleteById(id);
 
-        return "redirect:/";
+        return "redirect:/phob";
     }
 
     @GetMapping("create")
@@ -44,6 +44,6 @@ public class ContactCtr {
         Contact book = repo.save(new Contact(name, phone));
         log.debug("New contact {}", book);
 
-        return "redirect:/";
+        return "redirect:/phob";
     }
 }
