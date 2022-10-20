@@ -23,7 +23,7 @@ public class ContactCtr {
     public String home(Model model) {
         log.traceEntry("home()");
 
-        model.addAttribute("contacts", repo.findAll());
+        model.addAttribute("contacts", repo.findAllByOrderByName());
 
         return "home";
     }
