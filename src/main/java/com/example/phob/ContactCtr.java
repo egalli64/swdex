@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
-public class BookCtr {
-    private static final Logger log = LogManager.getLogger(BookCtr.class);
+public class ContactCtr {
+    private static final Logger log = LogManager.getLogger(ContactCtr.class);
 
-    private BookRepo repo;
+    private ContactRepo repo;
 
-    public BookCtr(BookRepo repo) {
+    public ContactCtr(ContactRepo repo) {
         this.repo = repo;
     }
 
@@ -23,7 +23,7 @@ public class BookCtr {
     public String home(Model model) {
         log.traceEntry("home()");
 
-        model.addAttribute("phones", repo.findAll());
+        model.addAttribute("contacts", repo.findAll());
 
         return "home";
     }
@@ -41,7 +41,7 @@ public class BookCtr {
     public String create(@RequestParam String name, @RequestParam String phone) {
         log.traceEntry("create({}, {})", name, phone);
 
-        Book book = repo.save(new Book(name, phone));
+        Contact book = repo.save(new Contact(name, phone));
         log.debug("New contact {}", book);
 
         return "redirect:/";

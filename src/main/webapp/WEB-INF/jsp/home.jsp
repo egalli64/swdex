@@ -26,11 +26,11 @@
                             <th scope="col"></th>
                         </tr>
                     </thead>
-                    <c:forEach var="item" items="${phones}">
+                    <c:forEach var="contact" items="${contacts}">
                         <tr>
-                            <td>${item.name}</td>
-                            <td>${item.phone}</td>
-                            <td><a href="delete?id=${item.id}" class="btn btn-danger"><i class="bi-trash"></i></a></td>
+                            <td>${contact.name}</td>
+                            <td>${contact.phone}</td>
+                            <td><a href="delete?id=${contact.id}" class="btn btn-danger"><i class="bi-trash"></i></a></td>
                         </tr>
                     </c:forEach>
                 </table>

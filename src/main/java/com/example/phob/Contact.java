@@ -9,19 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Book {
+public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BOOK_ID")
+    @Column(name = "CONTACT_ID")
     private Integer id;
 
     private String name;
     private String phone;
 
-    public Book() {
+    public Contact() {
     }
 
-    public Book(String name, String phone) {
+    public Contact(String name, String phone) {
         this.name = name;
         this.phone = phone;
     }
@@ -63,12 +63,12 @@ public class Book {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Book other = (Book) obj;
+        Contact other = (Contact) obj;
         return Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(phone, other.phone);
     }
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", name=" + name + ", phone=" + phone + "]";
+        return "Contact [id=" + id + ", name=" + name + ", phone=" + phone + "]";
     }
 }
