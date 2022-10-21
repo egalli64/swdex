@@ -1,5 +1,7 @@
 package com.example.swdex.ros;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -14,15 +16,22 @@ public class RosCtr {
 
     private CategoryRepo catRepo;
     private MenuRepo menuRepo;
+    private OrderingRepo ordRepo;
 
-    public RosCtr(CategoryRepo catRepo, MenuRepo menuRepo) {
+    public RosCtr(CategoryRepo catRepo, MenuRepo menuRepo, OrderingRepo ordRepo) {
         this.catRepo = catRepo;
         this.menuRepo = menuRepo;
+        this.ordRepo = ordRepo;
     }
 
     @GetMapping
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
         log.traceEntry("home()");
+
+        if (session.getAttribute("ordering") == null) {
+            Ordering ord = ordRepo.save(new Ordering());
+            session.setAttribute("ordering", ord);
+        }
 
         model.addAttribute("categories", catRepo.findAll());
         model.addAttribute("menuItems", menuRepo.findAll());

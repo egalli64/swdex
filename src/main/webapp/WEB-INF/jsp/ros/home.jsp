@@ -14,6 +14,9 @@
 <body>
     <div class="container-fluid">
         <h1 class="text-center m-5">A Very Simple Restaurant Ordering System</h1>
+        <nav class="navbar navbar-dark bg-primary" style="--bs-bg-opacity: .2;">
+            <span>order ${ordering.id} ${ordering.name}</span>
+        </nav>
 
         <c:forEach var="category" items="${categories}">
             <h2>${category.name}</h2>

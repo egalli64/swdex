@@ -26,6 +26,8 @@ commit;
 -- cleanup
 drop table if exists menu;
 drop table if exists category;
+drop table if exists command;
+drop table if exists ordering;
 
 create table category (
     category_id serial primary key,
@@ -75,3 +77,26 @@ begin
    		('Birra chiara', '50 cl. alla spina, nostra produzione', 5.0, v_drink);
     commit;
 end $$;
+
+create table ordering (
+    ordering_id serial primary key,
+    name varchar(20)
+);
+
+begin;
+    insert into ordering (name) values ('Tom');
+commit;
+
+create table command (
+    command_id serial primary key,
+    quantity integer not null,
+    ordering_id integer not null,
+    menu_id integer not null,
+    
+	constraint command_ordering_fk foreign key (ordering_id) references ordering (ordering_id),
+	constraint command_menu_fk foreign key (menu_id) references menu (menu_id)
+);
+
+begin;
+    insert into command (quantity, ordering_id, menu_id) values (1, 1, 4), (1, 1, 10);
+commit;
