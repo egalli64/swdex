@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,8 @@
                         <tr>
                             <td>${item.name}</td>
                             <td>${item.description}</td>
-                            <td>${item.price} €</td>
+                            <td class="text-end"><fmt:formatNumber type="currency" maxFractionDigits="2"
+                                    minFractionDigits="2" value="${item.price}" /></td>
                         </tr>
                     </c:if>
                 </c:forEach>
