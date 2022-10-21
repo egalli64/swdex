@@ -13,6 +13,24 @@
 <body>
     <div class="container-fluid">
         <h1 class="text-center m-5">A Very Simple Restaurant Ordering System</h1>
+
+        <c:forEach var="category" items="${categories}">
+            <h2>${category.name}</h2>
+            <c:if test="${not empty category.description}">
+                <h3 class="text-end">${category.description}</h3>
+            </c:if>
+            <table class="table table-hover">
+                <c:forEach var="item" items="${menuItems}">
+                    <c:if test="${category.id eq item.category}">
+                        <tr>
+                            <td>${item.name}</td>
+                            <td>${item.description}</td>
+                            <td>${item.price} €</td>
+                        </tr>
+                    </c:if>
+                </c:forEach>
+            </table>
+        </c:forEach>
     </div>
 </body>
 </html>
