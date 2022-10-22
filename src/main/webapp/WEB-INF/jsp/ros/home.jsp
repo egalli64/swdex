@@ -17,7 +17,11 @@
     <div class="container-fluid">
         <h1 class="text-center m-5">A Very Simple Restaurant Ordering System</h1>
         <nav class="navbar navbar-dark bg-primary">
-            <span>order ${ordering.id} ${ordering.name}</span>
+            <span class="p-2">order ${ordering.id} ${ordering.name}</span>
+            <a class="btn btn-primary">
+                <span id="counter" class="badge text-bg-secondary"></span>
+                <i class="bi bi-cart"></i>
+            </a>
         </nav>
 
         <c:forEach var="category" items="${categories}">
