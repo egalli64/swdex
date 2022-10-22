@@ -1,6 +1,7 @@
 package com.example.swdex.ros;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,5 +41,20 @@ public class RosCtr {
         model.addAttribute("menuItems", menuRepo.findAll());
 
         return "/ros/home";
+    }
+
+    @GetMapping("cart")
+    public String cart(HttpSession session) {
+        log.traceEntry("cart()");
+
+        @SuppressWarnings("unchecked")
+        Map<Integer, Integer> orders = (Map<Integer, Integer>) session.getAttribute("orders");
+        int counter = 0;
+        for (Integer cur : orders.values()) {
+            counter += cur;
+        }
+        session.setAttribute("counter", counter);
+
+        return "/ros/cart";
     }
 }
