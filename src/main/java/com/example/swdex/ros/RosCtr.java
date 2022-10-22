@@ -1,5 +1,7 @@
 package com.example.swdex.ros;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
@@ -31,6 +33,7 @@ public class RosCtr {
         if (session.getAttribute("ordering") == null) {
             Ordering ord = ordRepo.save(new Ordering());
             session.setAttribute("ordering", ord);
+            session.setAttribute("orders", new HashMap<Integer, Integer>());
         }
 
         model.addAttribute("categories", catRepo.findAll());
