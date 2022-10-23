@@ -10,7 +10,7 @@
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <link rel="icon" href="data:;base64,=">
-<script src="/js/home.js"></script>
+<script src="/js/ros.js"></script>
 <title>Restaurant Ordering System</title>
 </head>
 <body>
@@ -38,7 +38,7 @@
                             <td class="text-end"><fmt:formatNumber type="currency" maxFractionDigits="2"
                                     minFractionDigits="2" value="${item.price}" /></td>
                             <td>
-                                <button class="btn btn-primary" onclick="increase(${item.id})">
+                                <button class="btn btn-primary" onclick="plainIncrease(${item.id})">
                                     <i class="bi-plus"></i>
                                 </button>
                             </td>

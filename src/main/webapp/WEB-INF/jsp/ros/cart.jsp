@@ -10,7 +10,7 @@
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <link rel="icon" href="data:;base64,=">
-<script src="/js/home.js"></script>
+<script src="/js/ros.js"></script>
 <title>ROS cart</title>
 </head>
 <body>
@@ -38,10 +38,10 @@
                             <button class="btn btn-primary" onclick="increase(${item.id})">
                                 <i class="bi-plus"></i>
                             </button>
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" onclick="decrease(${item.id})">
                                 <i class="bi-dash"></i>
                             </button>
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" onclick="remove(${item.id})">
                                 <i class="bi-trash"></i>
                             </button>
                         </td>
@@ -53,7 +53,7 @@
             </c:forEach>
             <tr>
                 <td class="w-50"></td>
-                <td>${counter}</td>
+                <td id="counter">${counter}</td>
                 <td>
                     <button class="btn btn-primary">
                         <i class="bi-trash"></i>

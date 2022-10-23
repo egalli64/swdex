@@ -15,18 +15,49 @@ public class RosCtrRest {
     private static final Logger log = LogManager.getLogger(RosCtrRest.class);
 
     @GetMapping("/ros/increase/{id}")
-    public boolean increase(@PathVariable int id, HttpSession session) {
+    public int[] increase(@PathVariable Integer id, HttpSession session) {
         log.traceEntry("increase({})", id);
 
         @SuppressWarnings("unchecked")
         Map<Integer, Integer> orders = (Map<Integer, Integer>) session.getAttribute("orders");
         Integer prev = orders.putIfAbsent(id, 1);
         if (prev != null) {
-            orders.put(id, prev + 1);
-            return true;
+            Integer cur = prev + 1;
+            orders.put(id, cur);
+            log.trace("increased order {}, {}", id, cur);
+            return new int[] { id, cur };
         }
 
         log.trace("Current orders {}", orders);
-        return false;
+        return new int[] { id, 1 };
+    }
+
+    @GetMapping("/ros/decrease/{id}")
+    public int[] decrease(@PathVariable Integer id, HttpSession session) {
+        log.traceEntry("decrease({})", id);
+
+        @SuppressWarnings("unchecked")
+        Map<Integer, Integer> orders = (Map<Integer, Integer>) session.getAttribute("orders");
+        Integer prev = orders.get(id);
+        if (prev != null && prev > 0) {
+            Integer cur = prev - 1;
+            orders.put(id, cur);
+            return new int[] { id, cur };
+        }
+
+        log.warn("Can't find order {}", id);
+        return new int[] { id, 0 };
+    }
+
+    @GetMapping("/ros/reset/{id}")
+    public int[] reset(@PathVariable Integer id, HttpSession session) {
+        log.traceEntry("reset({})", id);
+
+        @SuppressWarnings("unchecked")
+        Map<Integer, Integer> orders = (Map<Integer, Integer>) session.getAttribute("orders");
+        orders.put(id, 0);
+
+        log.trace("Current orders {}", orders);
+        return new int[] { id, 0 };
     }
 }
