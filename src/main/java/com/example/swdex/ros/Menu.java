@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Menu {
@@ -20,6 +21,8 @@ public class Menu {
     private Double price;
     @Column(name = "CATEGORY_ID")
     private Integer category;
+    @Transient
+    private int quantity;
 
     public Menu() {
     }
@@ -62,6 +65,14 @@ public class Menu {
 
     public void setCategory(Integer category) {
         this.category = category;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override

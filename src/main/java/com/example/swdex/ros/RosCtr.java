@@ -48,9 +48,17 @@ public class RosCtr {
 
         @SuppressWarnings("unchecked")
         Map<Integer, Integer> orders = (Map<Integer, Integer>) session.getAttribute("orders");
+        @SuppressWarnings("unchecked")
+        Iterable<Menu> items = (Iterable<Menu>) session.getAttribute("menuItems");
         int counter = 0;
-        for (Integer cur : orders.values()) {
-            counter += cur;
+        for (Menu item : items) {
+            Integer cur = orders.get(item.getId());
+            if (cur != null) {
+                item.setQuantity(cur);
+                counter += cur;
+            } else {
+                item.setQuantity(0);
+            }
         }
         session.setAttribute("counter", counter);
 

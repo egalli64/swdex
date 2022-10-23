@@ -28,42 +28,40 @@
             </div>
         </nav>
         
-        <c:forEach var="category" items="${categories}">
-            <h2>${category.name}</h2>
-            <table class="table table-hover">
-                <c:forEach var="item" items="${menuItems}">
-                    <c:if test="${category.id eq item.category}">
-                        <tr>
-                            <td class="w-50">${item.name}</td>
-                            <td>
-                                <button class="btn btn-primary" onclick="increase(${item.id})">
-                                    <i class="bi-plus"></i>
-                                </button>
-                                <button class="btn btn-primary">
-                                    <i class="bi-dash"></i>
-                                </button>
-                                <button class="btn btn-primary">
-                                    <i class="bi-trash"></i>
-                                </button>
-                            </td>
-                            <td class="text-end"><fmt:formatNumber type="currency" maxFractionDigits="2"
-                                    minFractionDigits="2" value="${item.price}" />
-                            </td>
-                        </tr>
-                    </c:if>
-                </c:forEach>
-            </table>
-        </c:forEach>
         <table class="table table-hover">
+            <c:forEach var="item" items="${menuItems}">
+                <c:if test="${item.quantity > 0}">
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="increase(${item.id})">
+                                <i class="bi-plus"></i>
+                            </button>
+                            <button class="btn btn-primary">
+                                <i class="bi-dash"></i>
+                            </button>
+                            <button class="btn btn-primary">
+                                <i class="bi-trash"></i>
+                            </button>
+                        </td>
+                        <td class="text-end"><fmt:formatNumber type="currency" maxFractionDigits="2"
+                                minFractionDigits="2" value="${item.price * item.quantity}" />
+                        </td>
+                    </tr>
+                </c:if>
+            </c:forEach>
             <tr>
                 <td class="w-50"></td>
+                <td>${counter}</td>
                 <td>
                     <button class="btn btn-primary">
                         <i class="bi-trash"></i>
                     </button>
                 </td>
-                <td class="text-end"><fmt:formatNumber type="currency" maxFractionDigits="2" minFractionDigits="2"
-                        value="42" /></td>
+                <td class="text-end">
+                    <fmt:formatNumber type="currency" maxFractionDigits="2" minFractionDigits="2" value="999.99" />
+                </td>
             </tr>
 
         </table>
