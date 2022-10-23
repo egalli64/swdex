@@ -75,6 +75,10 @@ public class Menu {
         this.quantity = quantity;
     }
 
+    public void changeQuantity(int delta) {
+        quantity += delta;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(category, description, id, name, price);

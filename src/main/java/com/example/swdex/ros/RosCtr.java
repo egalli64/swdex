@@ -33,10 +33,17 @@ public class RosCtr {
         if (session.getAttribute("ordering") == null) {
             Ordering ord = ordRepo.save(new Ordering());
             session.setAttribute("ordering", ord);
-            session.setAttribute("orders", new HashMap<Integer, Integer>());
 
+            Iterable<Menu> items = menuRepo.findAll();
+            session.setAttribute("menuItems", items);
+
+            Map<Integer, Menu> orders = new HashMap<>();
+            for (Menu item : items) {
+                orders.put(item.getId(), item);
+            }
+
+            session.setAttribute("orders", orders);
             session.setAttribute("categories", catRepo.findAll());
-            session.setAttribute("menuItems", menuRepo.findAll());
         }
 
         return "/ros/home";
@@ -45,26 +52,6 @@ public class RosCtr {
     @GetMapping("cart")
     public String cart(HttpSession session) {
         log.traceEntry("cart()");
-
-        @SuppressWarnings("unchecked")
-        Map<Integer, Integer> orders = (Map<Integer, Integer>) session.getAttribute("orders");
-        @SuppressWarnings("unchecked")
-        Iterable<Menu> items = (Iterable<Menu>) session.getAttribute("menuItems");
-        Ordering ord = (Ordering) session.getAttribute("ordering");
-
-        int counter = 0;
-        ord.setTotal(0.0);
-        for (Menu item : items) {
-            Integer cur = orders.get(item.getId());
-            if (cur != null) {
-                item.setQuantity(cur);
-                counter += cur;
-                ord.setTotal(ord.getTotal() + cur * item.getPrice());
-            } else {
-                item.setQuantity(0);
-            }
-        }
-        session.setAttribute("counter", counter);
 
         return "/ros/cart";
     }

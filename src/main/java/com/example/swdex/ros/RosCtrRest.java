@@ -15,21 +15,19 @@ public class RosCtrRest {
     private static final Logger log = LogManager.getLogger(RosCtrRest.class);
 
     @GetMapping("/ros/increase/{id}")
-    public int[] increase(@PathVariable Integer id, HttpSession session) {
+    public Menu increase(@PathVariable Integer id, HttpSession session) {
         log.traceEntry("increase({})", id);
 
         @SuppressWarnings("unchecked")
-        Map<Integer, Integer> orders = (Map<Integer, Integer>) session.getAttribute("orders");
-        Integer prev = orders.putIfAbsent(id, 1);
-        if (prev != null) {
-            Integer cur = prev + 1;
-            orders.put(id, cur);
-            log.trace("increased order {}, {}", id, cur);
-            return new int[] { id, cur };
-        }
+        Map<Integer, Menu> orders = (Map<Integer, Menu>) session.getAttribute("orders");
+        Menu cur = orders.get(id);
+        cur.changeQuantity(1);
 
-        log.trace("Current orders {}", orders);
-        return new int[] { id, 1 };
+        Ordering ord = (Ordering) session.getAttribute("ordering");
+        ord.changeCounter(1);
+
+        log.trace("Current order {}", cur);
+        return cur;
     }
 
     @GetMapping("/ros/decrease/{id}")

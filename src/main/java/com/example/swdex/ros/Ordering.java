@@ -19,6 +19,8 @@ public class Ordering {
     private String name;
 
     @Transient
+    private int counter;
+    @Transient
     private double total;
 
     public Ordering() {
@@ -48,6 +50,18 @@ public class Ordering {
         this.total = total;
     }
 
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public void changeCounter(int delta) {
+        counter += delta;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
@@ -67,6 +81,6 @@ public class Ordering {
 
     @Override
     public String toString() {
-        return "Ordering [id=" + id + ", name=" + name + ", total=" + total + "]";
+        return "Ordering [id=" + id + ", name=" + name + ", counter=" + counter + ", total=" + total + "]";
     }
 }

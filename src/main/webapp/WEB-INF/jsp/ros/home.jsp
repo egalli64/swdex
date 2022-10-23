@@ -19,7 +19,7 @@
         <nav class="navbar navbar-dark bg-primary">
             <span class="p-2">order ${ordering.id} ${ordering.name}</span>
             <a href="/ros/cart" class="btn btn-primary">
-                <span id="counter" class="badge text-bg-secondary">${counter}</span>
+                <span id="counter" class="badge text-bg-secondary">${ordering.counter}</span>
                 <i class="bi bi-cart"></i>
             </a>
         </nav>
