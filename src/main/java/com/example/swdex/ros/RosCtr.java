@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,17 +27,17 @@ public class RosCtr {
     }
 
     @GetMapping
-    public String home(Model model, HttpSession session) {
+    public String home(HttpSession session) {
         log.traceEntry("home()");
 
         if (session.getAttribute("ordering") == null) {
             Ordering ord = ordRepo.save(new Ordering());
             session.setAttribute("ordering", ord);
             session.setAttribute("orders", new HashMap<Integer, Integer>());
-        }
 
-        model.addAttribute("categories", catRepo.findAll());
-        model.addAttribute("menuItems", menuRepo.findAll());
+            session.setAttribute("categories", catRepo.findAll());
+            session.setAttribute("menuItems", menuRepo.findAll());
+        }
 
         return "/ros/home";
     }
@@ -56,5 +55,14 @@ public class RosCtr {
         session.setAttribute("counter", counter);
 
         return "/ros/cart";
+    }
+
+    @GetMapping("checkout")
+    public String checkout(HttpSession session) {
+        log.traceEntry("checkout()");
+
+        session.invalidate();
+
+        return "redirect:/";
     }
 }

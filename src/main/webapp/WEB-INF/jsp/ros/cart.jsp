@@ -18,10 +18,14 @@
         <h1 class="text-center m-5">ROS cart</h1>
         <nav class="navbar navbar-dark bg-primary">
             <span class="p-2">order ${ordering.id} ${ordering.name}</span>
-            <a href="/ros" class="btn btn-primary">
-                <span id="counter" class="badge text-bg-secondary"></span>
-                <i class="bi bi-backspace"></i>
-            </a>
+            <div>            
+                <a href="/ros" class="btn btn-primary">
+                    <i class="bi bi-box-arrow-up-left"></i>
+                </a>               
+                <a href="/ros/checkout" class="btn btn-primary">
+                    <i class="bi bi-bag-check"></i>
+                </a>
+            </div>
         </nav>
     </div>
 </body>
