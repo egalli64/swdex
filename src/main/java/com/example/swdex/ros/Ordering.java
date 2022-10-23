@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Ordering {
@@ -16,6 +17,9 @@ public class Ordering {
     private Integer id;
 
     private String name;
+
+    @Transient
+    private double total;
 
     public Ordering() {
     }
@@ -34,6 +38,14 @@ public class Ordering {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     @Override
@@ -55,6 +67,6 @@ public class Ordering {
 
     @Override
     public String toString() {
-        return "Ordering [id=" + id + ", name=" + name + "]";
+        return "Ordering [id=" + id + ", name=" + name + ", total=" + total + "]";
     }
 }

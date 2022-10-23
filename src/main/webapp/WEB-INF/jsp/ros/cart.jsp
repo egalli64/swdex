@@ -60,7 +60,7 @@
                     </button>
                 </td>
                 <td class="text-end">
-                    <fmt:formatNumber type="currency" maxFractionDigits="2" minFractionDigits="2" value="999.99" />
+                    <fmt:formatNumber type="currency" maxFractionDigits="2" minFractionDigits="2" value="${ordering.total}" />
                 </td>
             </tr>
 
