@@ -22,11 +22,12 @@ begin;
    		('Zoe', '994 34 3434');
 commit;
 
+rollback;
+
 -- Restaurant Ordering System
 -- cleanup
 drop table if exists menu;
 drop table if exists category;
-drop table if exists command;
 drop table if exists ordering;
 
 create table category (
@@ -87,6 +88,7 @@ begin;
     insert into ordering (name) values ('Tom');
 commit;
 
+/*
 create table command (
     command_id serial primary key,
     quantity integer not null,
@@ -100,3 +102,4 @@ create table command (
 begin;
     insert into command (quantity, ordering_id, menu_id) values (1, 1, 4), (1, 1, 10);
 commit;
+ */
