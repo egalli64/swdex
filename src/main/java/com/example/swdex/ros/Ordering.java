@@ -50,6 +50,10 @@ public class Ordering {
         this.total = total;
     }
 
+    public void changeTotal(double delta) {
+        total += delta;
+    }
+
     public int getCounter() {
         return counter;
     }

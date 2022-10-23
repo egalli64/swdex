@@ -20,14 +20,15 @@ public class RosCtrRest {
 
         @SuppressWarnings("unchecked")
         Map<Integer, Menu> orders = (Map<Integer, Menu>) session.getAttribute("orders");
-        Menu cur = orders.get(id);
-        cur.changeQuantity(1);
+        Menu order = orders.get(id);
+        order.changeQuantity(1);
 
         Ordering ord = (Ordering) session.getAttribute("ordering");
         ord.changeCounter(1);
+        ord.changeTotal(order.getPrice());
 
-        log.trace("Current order {}", cur);
-        return cur;
+        log.trace("Current order {}", order);
+        return order;
     }
 
     @GetMapping("/ros/decrease/{id}")
