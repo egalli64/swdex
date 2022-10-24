@@ -1,5 +1,6 @@
 package com.example.swdex.ros;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 @Entity
-public class Menu {
+public class Menu implements Serializable {
+    private static final long serialVersionUID = -7076053921726503431L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MENU_ID")
@@ -101,6 +104,6 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + ", category="
-                + category + "]";
+                + category + ", quantity=" + quantity + "]";
     }
 }

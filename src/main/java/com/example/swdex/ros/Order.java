@@ -1,6 +1,10 @@
 package com.example.swdex.ros;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
+    private static final long serialVersionUID = 6967114303294809018L;
+
     private int categoryId;
     private int menuId;
     private int quantity;
