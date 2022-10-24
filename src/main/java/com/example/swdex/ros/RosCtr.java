@@ -65,6 +65,6 @@ public class RosCtr {
 
         session.invalidate();
 
-        return "redirect:/";
+        return "redirect:/ros/";
     }
 }

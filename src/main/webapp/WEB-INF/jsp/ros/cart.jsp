@@ -56,9 +56,9 @@
                 <td class="w-50"></td>
                 <td id="counter">${ordering.counter}</td>
                 <td>
-                    <button class="btn btn-primary">
+                    <a href="checkout" class="btn btn-primary">
                         <i class="bi-trash"></i>
-                    </button>
+                    </a>
                 </td>
                 <td id="total" class="text-end">
                     <fmt:formatNumber type="currency" maxFractionDigits="2" minFractionDigits="2" value="${ordering.total}" />
