@@ -25,28 +25,27 @@ public class RosCtrRest {
         log.trace("Current order {}", order);
 
         Ordering ord = (Ordering) session.getAttribute("ordering");
-        ord.changeCounter(1);
-        ord.changeTotal(order.getPrice());
+        change(ord, 1, order.getPrice());
         log.trace("Current ordering {}", ord);
 
         return order;
     }
 
     @GetMapping("/ros/decrease/{id}")
-    public int[] decrease(@PathVariable Integer id, HttpSession session) {
+    public Menu decrease(@PathVariable Integer id, HttpSession session) {
         log.traceEntry("decrease({})", id);
 
         @SuppressWarnings("unchecked")
-        Map<Integer, Integer> orders = (Map<Integer, Integer>) session.getAttribute("orders");
-        Integer prev = orders.get(id);
-        if (prev != null && prev > 0) {
-            Integer cur = prev - 1;
-            orders.put(id, cur);
-            return new int[] { id, cur };
-        }
+        Map<Integer, Menu> orders = (Map<Integer, Menu>) session.getAttribute("orders");
+        Menu order = orders.get(id);
+        Menu copy = new Menu(order);
+        order.changeQuantity(-1);
 
-        log.warn("Can't find order {}", id);
-        return new int[] { id, 0 };
+        Ordering ord = (Ordering) session.getAttribute("ordering");
+        change(ord, -1, order.getPrice());
+
+        log.trace("Reset {}", order);
+        return copy;
     }
 
     @GetMapping("/ros/reset/{id}")
@@ -60,11 +59,14 @@ public class RosCtrRest {
         order.setQuantity(0);
 
         Ordering ord = (Ordering) session.getAttribute("ordering");
-        int less = -copy.getQuantity();
-        ord.changeCounter(less);
-        ord.changeTotal(less * order.getPrice());
+        change(ord, -copy.getQuantity(), order.getPrice());
 
         log.trace("Reset {}", order);
         return copy;
+    }
+
+    private void change(Ordering ord, int quantity, double price) {
+        ord.changeCounter(quantity);
+        ord.changeTotal(quantity * price);
     }
 }

@@ -26,43 +26,35 @@ function increased() {
 	if (this.status != 200) {
 		console.log(this.status);
 	} else {
-		let counter = document.getElementById('counter');
-		counter.textContent = +counter.textContent + 1;
-
 		let item = JSON.parse(this.responseText);
 
-		let qty = document.getElementById('qty-' + item.id);
-		qty.textContent = +qty.textContent + 1;
-
-		let tot = document.getElementById('tot-' + item.id);
-		tot.textContent = addCurrency(tot.textContent, item.price);
-
-		let total = document.getElementById('total');
-		total.textContent = addCurrency(total.textContent, item.price);
+		changeOrder(item, 1);
+		changeRecap(1, item.price);
 	}
-}
-
-/**
- * Increase a string representing an amount
- *
- * @param amount the initial amount
- * @param delta the increase
- *
- * @returns the string representing the new amount (in €)
- */
-function addCurrency(amount, delta) {
-	let value = Number(amount.replace(/[^0-9]+/g, "")) + delta * 100;
-	let decimal = value % 100;
-	if (decimal < 10) {
-		decimal += "0";
-	}
-	return value / 100 + "," + decimal + " €";
 }
 
 function decrease(id) {
 	let request = new XMLHttpRequest();
+	request.onload = decreased;
 	request.open("GET", "/ros/decrease/" + id);
 	request.send();
+}
+
+function decreased() {
+	if (this.status != 200) {
+		console.log(this.status);
+	} else {
+		let item = JSON.parse(this.responseText);
+
+		if (item.quantity == 1) {
+			let ord = document.getElementById('ord-' + item.id);
+			ord.style.display = 'none';
+		} else {
+			changeOrder(item, -1);
+		}
+
+		changeRecap(-1, item.price);
+	}
 }
 
 function remove(id) {
@@ -81,10 +73,39 @@ function removed() {
 		let ord = document.getElementById('ord-' + item.id);
 		ord.style.display = 'none';
 
-		let counter = document.getElementById('counter');
-		counter.textContent = +counter.textContent - item.quantity;
-		
-		let total = document.getElementById('total');
-		total.textContent = addCurrency(total.textContent, -item.price * item.quantity);
+		changeRecap(-item.quantity, item.price);
 	}
+}
+
+/**
+ * Change an amount represented as currency
+ *
+ * @param current the current amount
+ * @param delta the increase
+ *
+ * @returns the string representing the new amount (in €)
+ */
+function changeAmount(current, delta) {
+	let value = Number(current.replace(/[^0-9]+/g, "")) + delta * 100;
+	let decimal = value % 100;
+	if (decimal < 10) {
+		decimal += "0";
+	}
+	return value / 100 + "," + decimal + " €";
+}
+
+function changeRecap(count, price) {
+	let counter = document.getElementById('counter');
+	counter.textContent = +counter.textContent + count;
+
+	let total = document.getElementById('total');
+	total.textContent = changeAmount(total.textContent, count * price);
+}
+
+function changeOrder(item, delta) {
+	let qty = document.getElementById('qty-' + item.id);
+	qty.textContent = +qty.textContent + delta;
+
+	let tot = document.getElementById('tot-' + item.id);
+	tot.textContent = changeAmount(tot.textContent, delta * item.price);
 }
