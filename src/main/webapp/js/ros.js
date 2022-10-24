@@ -56,7 +56,7 @@ function addCurrency(amount, delta) {
 	if (decimal < 10) {
 		decimal += "0";
 	}
-	return value / 100 + "," + decimal + " €";	
+	return value / 100 + "," + decimal + " €";
 }
 
 function decrease(id) {
@@ -67,6 +67,24 @@ function decrease(id) {
 
 function remove(id) {
 	let request = new XMLHttpRequest();
+	request.onload = removed;
 	request.open("GET", "/ros/reset/" + id);
 	request.send();
+}
+
+function removed() {
+	if (this.status != 200) {
+		console.log(this.status);
+	} else {
+		let item = JSON.parse(this.responseText);
+
+		let ord = document.getElementById('ord-' + item.id);
+		ord.style.display = 'none';
+
+		let counter = document.getElementById('counter');
+		counter.textContent = +counter.textContent - item.quantity;
+		
+		let total = document.getElementById('total');
+		total.textContent = addCurrency(total.textContent, -item.price * item.quantity);
+	}
 }

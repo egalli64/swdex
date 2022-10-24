@@ -50,14 +50,21 @@ public class RosCtrRest {
     }
 
     @GetMapping("/ros/reset/{id}")
-    public int[] reset(@PathVariable Integer id, HttpSession session) {
+    public Menu reset(@PathVariable Integer id, HttpSession session) {
         log.traceEntry("reset({})", id);
 
         @SuppressWarnings("unchecked")
-        Map<Integer, Integer> orders = (Map<Integer, Integer>) session.getAttribute("orders");
-        orders.put(id, 0);
+        Map<Integer, Menu> orders = (Map<Integer, Menu>) session.getAttribute("orders");
+        Menu order = orders.get(id);
+        Menu copy = new Menu(order);
+        order.setQuantity(0);
 
-        log.trace("Current orders {}", orders);
-        return new int[] { id, 0 };
+        Ordering ord = (Ordering) session.getAttribute("ordering");
+        int less = -copy.getQuantity();
+        ord.changeCounter(less);
+        ord.changeTotal(less * order.getPrice());
+
+        log.trace("Reset {}", order);
+        return copy;
     }
 }

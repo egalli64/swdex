@@ -31,7 +31,7 @@
         <table class="table table-hover">
             <c:forEach var="item" items="${menuItems}">
                 <c:if test="${item.quantity > 0}">
-                    <tr>
+                    <tr id="ord-${item.id}">
                         <td>${item.name}</td>
                         <td id="qty-${item.id}">${item.quantity}</td>
                         <td>

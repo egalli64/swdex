@@ -30,6 +30,15 @@ public class Menu implements Serializable {
     public Menu() {
     }
 
+    public Menu(Menu other) {
+        this.id = other.id;
+        this.name = other.name;
+        this.description = other.description;
+        this.price = other.price;
+        this.category = other.category;
+        this.quantity = other.quantity;
+    }
+    
     public Integer getId() {
         return id;
     }
