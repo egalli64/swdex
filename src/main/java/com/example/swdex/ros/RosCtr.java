@@ -53,6 +53,9 @@ public class RosCtr {
     public String cart(HttpSession session) {
         log.traceEntry("cart()");
 
+        Ordering ord = (Ordering) session.getAttribute("ordering");
+        log.trace("{}", ord);
+
         return "/ros/cart";
     }
 

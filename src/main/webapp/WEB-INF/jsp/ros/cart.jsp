@@ -19,7 +19,7 @@
         <nav class="navbar navbar-dark bg-primary">
             <span class="p-2">order ${ordering.id} ${ordering.name}</span>
             <div>            
-                <a href="/ros" class="btn btn-primary">
+                <a href="/ros/" class="btn btn-primary">
                     <i class="bi bi-box-arrow-up-left"></i>
                 </a>               
                 <a href="/ros/checkout" class="btn btn-primary">
@@ -33,7 +33,7 @@
                 <c:if test="${item.quantity > 0}">
                     <tr>
                         <td>${item.name}</td>
-                        <td>${item.quantity}</td>
+                        <td id="qty-${item.id}">${item.quantity}</td>
                         <td>
                             <button class="btn btn-primary" onclick="increase(${item.id})">
                                 <i class="bi-plus"></i>
@@ -45,7 +45,8 @@
                                 <i class="bi-trash"></i>
                             </button>
                         </td>
-                        <td class="text-end"><fmt:formatNumber type="currency" maxFractionDigits="2"
+                        <td id="tot-${item.id}" class="text-end">
+                            <fmt:formatNumber type="currency" maxFractionDigits="2"
                                 minFractionDigits="2" value="${item.price * item.quantity}" />
                         </td>
                     </tr>
@@ -53,13 +54,13 @@
             </c:forEach>
             <tr>
                 <td class="w-50"></td>
-                <td id="counter">${counter}</td>
+                <td id="counter">${ordering.counter}</td>
                 <td>
                     <button class="btn btn-primary">
                         <i class="bi-trash"></i>
                     </button>
                 </td>
-                <td class="text-end">
+                <td id="total" class="text-end">
                     <fmt:formatNumber type="currency" maxFractionDigits="2" minFractionDigits="2" value="${ordering.total}" />
                 </td>
             </tr>

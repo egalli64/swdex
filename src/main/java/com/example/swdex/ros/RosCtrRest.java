@@ -22,12 +22,13 @@ public class RosCtrRest {
         Map<Integer, Menu> orders = (Map<Integer, Menu>) session.getAttribute("orders");
         Menu order = orders.get(id);
         order.changeQuantity(1);
+        log.trace("Current order {}", order);
 
         Ordering ord = (Ordering) session.getAttribute("ordering");
         ord.changeCounter(1);
         ord.changeTotal(order.getPrice());
+        log.trace("Current ordering {}", ord);
 
-        log.trace("Current order {}", order);
         return order;
     }
 
