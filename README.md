@@ -1,4 +1,5 @@
 # swdex - Spring Web Data Exercises
 
-PostgreSQL setup required
-- See application.yml for details
+PostgreSQL required, see
+- application.yml in src/main/resources
+- once.sql and setup.sql in src/script/sql
