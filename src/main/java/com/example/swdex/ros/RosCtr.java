@@ -3,7 +3,7 @@ package com.example.swdex.ros;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,6 +65,6 @@ public class RosCtr {
 
         session.invalidate();
 
-        return "redirect:/ros/";
+        return "redirect:/ros";
     }
 }
