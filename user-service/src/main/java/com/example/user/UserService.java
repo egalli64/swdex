@@ -6,6 +6,7 @@
 package com.example.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,11 +26,11 @@ public class UserService {
         return repo.findAll();
     }
 
-    public User getById(Long id) {
-        log.traceEntry("getById({})", id);
-        return repo.findById(id).orElse(null);
+    public Optional<User> get(Long id) {
+        log.traceEntry("get({})", id);
+        return repo.findById(id);
     }
-
+    
     public User save(User user) {
         log.traceEntry("save({})", user);
         return repo.save(user);

@@ -6,6 +6,7 @@
 package com.example.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,10 +38,11 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable Long id) {
-        log.traceEntry("getById({})", id);
-        User user = svc.getById(id);
-        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    public ResponseEntity<User> get(@PathVariable Long id) {
+        log.traceEntry("get({})", id);
+
+        Optional<User> user = svc.get(id);
+        return user.isPresent() ? ResponseEntity.ok(user.get()) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
@@ -52,13 +54,16 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User newer) {
         log.traceEntry("update({}, {})", id, newer);
-        User user = svc.getById(id);
-        if (user != null) {
+
+        Optional<User> opt = svc.get(id);
+        if (opt.isPresent()) {
+            User user = opt.get();
             user.setName(newer.getName());
             user.setEmail(newer.getEmail());
             return ResponseEntity.ok(svc.save(user));
+        } else {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
