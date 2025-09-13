@@ -1,5 +1,4 @@
-/.classpath
-/.project
-/.dbeaver/
-/.settings/
-/target/
+.classpath
+.project
+.settings/
+target/
