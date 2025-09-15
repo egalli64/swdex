@@ -31,12 +31,22 @@ public class UserController {
         this.svc = svc;
     }
 
+    /**
+     * <pre>
+        curl -X GET http://localhost:8081/api/users
+     * </pre>
+     */
     @GetMapping
     public List<User> getAll() {
         log.traceEntry("getAll()");
         return svc.getAll();
     }
 
+    /**
+     * <pre>
+        curl -X GET http://localhost:8081/api/users/1
+     * </pre>
+     */
     @GetMapping("/{id}")
     public ResponseEntity<User> get(@PathVariable Long id) {
         log.traceEntry("get({})", id);
@@ -45,12 +55,26 @@ public class UserController {
         return user.isPresent() ? ResponseEntity.ok(user.get()) : ResponseEntity.notFound().build();
     }
 
+    /**
+     * <pre>
+        curl -X POST http://localhost:8081/api/users ^
+        -H "Content-Type: application/json" ^
+        -d "{\"name\": \"Tom\", \"email\": \"tom@example.com\"}"
+     * </pre>
+     */
     @PostMapping
     public User create(@RequestBody User user) {
         log.traceEntry("create({})", user);
         return svc.save(user);
     }
 
+    /**
+     * <pre>
+        curl -X PUT http://localhost:8081/api/users/1 ^
+        -H "Content-Type: application/json" ^
+        -d "{\"name\": \"Jane Smith\", \"email\": \"jane.smith@example.com\"}"
+     * </pre>
+     */
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User newer) {
         log.traceEntry("update({}, {})", id, newer);
@@ -66,6 +90,11 @@ public class UserController {
         }
     }
 
+    /**
+     * <pre>
+        curl -X DELETE http://localhost:8081/api/users/1
+     * </pre>
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         log.traceEntry("delete({})", id);
