@@ -24,18 +24,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/orders")
 public class OrderController {
     private static Logger log = LogManager.getLogger(OrderController.class);
-    private OrderService svc;
+
+    private final OrderService svc;
 
     public OrderController(OrderService svc) {
         this.svc = svc;
     }
 
+    /**
+     * <pre>
+        curl -X GET http://localhost:8082/api/orders
+     * </pre>
+     */
     @GetMapping
     public List<Order> getAll() {
         log.traceEntry("getAll()");
         return svc.getAll();
     }
 
+    /**
+     * <pre>
+        curl -X GET http://localhost:8082/api/orders/1
+     * </pre>
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Order> getById(@PathVariable Long id) {
         log.traceEntry("getById({})", id);
@@ -43,12 +54,26 @@ public class OrderController {
         return order.isPresent() ? ResponseEntity.ok(order.get()) : ResponseEntity.notFound().build();
     }
 
+    /**
+     * <pre>
+        curl -X POST http://localhost:8082/api/orders ^
+        -H "Content-Type: application/json" ^
+        -d "{\"userId\": 1, \"productId\": 42, \"quantity\": 6, \"status\": \"pending\"}"
+     * </pre>
+     */
     @PostMapping
     public Order create(@RequestBody Order order) {
         log.traceEntry("create({})", order);
         return svc.save(order);
     }
 
+    /**
+     * <pre>
+        curl -X PUT http://localhost:8082/api/orders/1 ^
+        -H "Content-Type: application/json" ^
+        -d "{\"userId\": 1, \"productId\": 99, \"quantity\": 7, \"status\": \"delivering\"}"
+     * </pre>
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Order> update(@PathVariable Long id, @RequestBody Order newer) {
         log.traceEntry("update({}, {})", id, newer);
@@ -65,6 +90,11 @@ public class OrderController {
         }
     }
 
+    /**
+     * <pre>
+        curl -X DELETE http://localhost:8082/api/orders/1
+     * </pre>
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         log.traceEntry("delete({})", id);
