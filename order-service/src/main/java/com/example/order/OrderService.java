@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderService {
     private static Logger log = LogManager.getLogger(OrderService.class);
-    private OrderRepository repo;
+    private final OrderRepository repo;
 
     public OrderService(OrderRepository repo) {
         this.repo = repo;
