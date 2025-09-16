@@ -33,7 +33,7 @@ public class UserController {
 
     /**
      * <pre>
-        curl -X GET http://localhost:8081/api/users
+        curl -X GET http://localhost:8080/api/users
      * </pre>
      */
     @GetMapping
@@ -44,7 +44,7 @@ public class UserController {
 
     /**
      * <pre>
-        curl -X GET http://localhost:8081/api/users/1
+        curl -X GET http://localhost:8080/api/users/1
      * </pre>
      */
     @GetMapping("/{id}")
@@ -57,7 +57,7 @@ public class UserController {
 
     /**
      * <pre>
-        curl -X POST http://localhost:8081/api/users ^
+        curl -X POST http://localhost:8080/api/users ^
         -H "Content-Type: application/json" ^
         -d "{\"name\": \"Tom\", \"email\": \"tom@example.com\"}"
      * </pre>
@@ -70,7 +70,7 @@ public class UserController {
 
     /**
      * <pre>
-        curl -X PUT http://localhost:8081/api/users/1 ^
+        curl -X PUT http://localhost:8080/api/users/1 ^
         -H "Content-Type: application/json" ^
         -d "{\"name\": \"Jane Smith\", \"email\": \"jane.smith@example.com\"}"
      * </pre>
@@ -92,7 +92,7 @@ public class UserController {
 
     /**
      * <pre>
-        curl -X DELETE http://localhost:8081/api/users/1
+        curl -X DELETE http://localhost:8080/api/users/1
      * </pre>
      */
     @DeleteMapping("/{id}")

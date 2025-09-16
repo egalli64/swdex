@@ -33,7 +33,7 @@ public class OrderController {
 
     /**
      * <pre>
-        curl -X GET http://localhost:8082/api/orders
+        curl -X GET http://localhost:8080/api/orders
      * </pre>
      */
     @GetMapping
@@ -44,19 +44,19 @@ public class OrderController {
 
     /**
      * <pre>
-        curl -X GET http://localhost:8082/api/orders/1
+        curl -X GET http://localhost:8080/api/orders/1
      * </pre>
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getById(@PathVariable Long id) {
-        log.traceEntry("getById({})", id);
+    public ResponseEntity<Order> get(@PathVariable Long id) {
+        log.traceEntry("get({})", id);
         Optional<Order> order = svc.get(id);
         return order.isPresent() ? ResponseEntity.ok(order.get()) : ResponseEntity.notFound().build();
     }
 
     /**
      * <pre>
-        curl -X POST http://localhost:8082/api/orders ^
+        curl -X POST http://localhost:8080/api/orders ^
         -H "Content-Type: application/json" ^
         -d "{\"userId\": 1, \"productId\": 42, \"quantity\": 6, \"status\": \"pending\"}"
      * </pre>
@@ -69,7 +69,7 @@ public class OrderController {
 
     /**
      * <pre>
-        curl -X PUT http://localhost:8082/api/orders/1 ^
+        curl -X PUT http://localhost:8080/api/orders/1 ^
         -H "Content-Type: application/json" ^
         -d "{\"userId\": 1, \"productId\": 99, \"quantity\": 7, \"status\": \"delivering\"}"
      * </pre>
@@ -92,7 +92,7 @@ public class OrderController {
 
     /**
      * <pre>
-        curl -X DELETE http://localhost:8082/api/orders/1
+        curl -X DELETE http://localhost:8080/api/orders/1
      * </pre>
      */
     @DeleteMapping("/{id}")
