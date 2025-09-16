@@ -1,0 +1,13 @@
+/*
+ * Spring Boot Microservices tutorial - Order service
+ * 
+ * https://github.com/egalli64/spring-microservices
+ */
+package com.example.order;
+
+@SuppressWarnings("serial")
+public class UserNotFoundException extends RuntimeException {
+    public UserNotFoundException(Long userId) {
+        super("User not found: " + userId);
+    }
+}
