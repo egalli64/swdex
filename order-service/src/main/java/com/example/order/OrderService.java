@@ -10,20 +10,25 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClient;
 
 @Service
 public class OrderService {
-    private static final String USER_URI = "http://user-service/api/users/";
+    private static final String USER_URI = "/api/users/";
     private static final Logger log = LogManager.getLogger(OrderService.class);
 
     private final OrderRepository repo;
-    private final RestTemplate rest;
+    private final DiscoveryClient discovery;
+    private final RestClient rest;
 
-    public OrderService(OrderRepository repo, RestTemplate rest) {
+    public OrderService(OrderRepository repo, DiscoveryClient discovery, RestClient.Builder builder) {
         this.repo = repo;
-        this.rest = rest;
+        this.discovery = discovery;
+        this.rest = builder.build();
     }
 
     public List<Order> getAll() {
@@ -42,11 +47,19 @@ public class OrderService {
     public Order save(Order order) {
         log.traceEntry("save({})", order);
 
+        List<ServiceInstance> instances = discovery.getInstances("user-service");
+        if (instances.isEmpty()) {
+            log.error("User service not found");
+            throw new ServiceUnavailableException("User service is not available");
+        }
+
+        ServiceInstance svc = instances.get(0);
+
         try {
-            rest.getForObject(USER_URI + order.getUserId(), Object.class);
-        } catch (Exception ex) {
-            log.warn("User not found", ex);
-            throw new UserNotFoundException(order.getUserId());
+            rest.get().uri(svc.getUri() + USER_URI + order.getUserId()).retrieve().toBodilessEntity();
+        } catch (HttpClientErrorException.NotFound ex) {
+            log.warn("Attempted to create order for non-existing user {}", order.getUserId());
+            throw new UserNotFoundException(order.getUserId(), ex);
         }
 
         return repo.save(order);
