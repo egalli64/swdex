@@ -18,7 +18,8 @@ import org.springframework.web.client.RestClient;
 
 @Service
 public class OrderService {
-    private static final String USER_URI = "/api/users/";
+    private static final String SVC_ID = "user-service";
+    private static final String SVC_URI = "/api/users/";
     private static final Logger log = LogManager.getLogger(OrderService.class);
 
     private final OrderRepository repo;
@@ -47,7 +48,7 @@ public class OrderService {
     public Order save(Order order) {
         log.traceEntry("save({})", order);
 
-        List<ServiceInstance> instances = discovery.getInstances("user-service");
+        List<ServiceInstance> instances = discovery.getInstances(SVC_ID);
         if (instances.isEmpty()) {
             log.error("User service not found");
             throw new ServiceUnavailableException("User service is not available");
@@ -56,7 +57,7 @@ public class OrderService {
         ServiceInstance svc = instances.get(0);
 
         try {
-            rest.get().uri(svc.getUri() + USER_URI + order.getUserId()).retrieve().toBodilessEntity();
+            rest.get().uri(svc.getUri() + SVC_URI + order.getUserId()).retrieve().toBodilessEntity();
         } catch (HttpClientErrorException.NotFound ex) {
             log.warn("Attempted to create order for non-existing user {}", order.getUserId());
             throw new UserNotFoundException(order.getUserId(), ex);
