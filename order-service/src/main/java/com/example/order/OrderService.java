@@ -15,6 +15,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestClientException;
 
 @Service
 public class OrderService {
@@ -61,6 +62,9 @@ public class OrderService {
         } catch (HttpClientErrorException.NotFound ex) {
             log.warn("Attempted to create order for non-existing user {}", order.getUserId());
             throw new UserNotFoundException(order.getUserId(), ex);
+        } catch (RestClientException ex) {
+            log.error("Failed to invoke the user service", ex);
+            throw new ServiceUnavailableException("User service is not available", ex);
         }
 
         return repo.save(order);
