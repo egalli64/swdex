@@ -25,12 +25,12 @@ public class OrderService {
 
     private final OrderRepository repo;
     private final DiscoveryClient discovery;
-    private final RestClient rest;
+    private final RestClient client;
 
     public OrderService(OrderRepository repo, DiscoveryClient discovery, RestClient.Builder builder) {
         this.repo = repo;
         this.discovery = discovery;
-        this.rest = builder.build();
+        this.client = builder.build();
     }
 
     public List<Order> getAll() {
@@ -58,7 +58,7 @@ public class OrderService {
         ServiceInstance svc = instances.get(0);
 
         try {
-            rest.get().uri(svc.getUri() + SVC_URI + order.getUserId()).retrieve().toBodilessEntity();
+            client.get().uri(svc.getUri() + SVC_URI + order.getUserId()).retrieve().toBodilessEntity();
         } catch (HttpClientErrorException.NotFound ex) {
             log.warn("Attempted to create order for non-existing user {}", order.getUserId());
             throw new UserNotFoundException(order.getUserId(), ex);

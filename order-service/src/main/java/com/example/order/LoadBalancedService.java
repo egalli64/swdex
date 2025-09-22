@@ -20,7 +20,7 @@ public class LoadBalancedService {
     private static final Logger log = LogManager.getLogger(LoadBalancedService.class);
 
     private final OrderRepository repo;
-    private final RestClient rest;
+    private final RestClient client;
 
     /**
      * Injecting the required beans
@@ -31,7 +31,7 @@ public class LoadBalancedService {
     public LoadBalancedService(OrderRepository repo,
             @Qualifier("loadBalancedRestClientBuilder") RestClient.Builder builder) {
         this.repo = repo;
-        this.rest = builder.build();
+        this.client = builder.build();
     }
 
     /**
@@ -41,7 +41,7 @@ public class LoadBalancedService {
         log.traceEntry("save({})", order);
 
         try {
-            rest.get().uri("http://" + SVC_ID + SVC_URI + order.getUserId()).retrieve().toBodilessEntity();
+            client.get().uri("http://" + SVC_ID + SVC_URI + order.getUserId()).retrieve().toBodilessEntity();
         } catch (HttpClientErrorException.NotFound ex) {
             log.warn("Attempted to create order for non-existing user {}", order.getUserId());
             throw new UserNotFoundException(order.getUserId(), ex);
