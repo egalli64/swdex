@@ -10,12 +10,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.reactive.function.client.WebClient;
 
 /**
- * Beans for RestClient.Builder 
+ * Beans for RestClient.Builder
  */
 @Configuration
-public class RestClientConfig {
+public class ClientConfig {
     /**
      * The primary option is for the plain RestClient.Builder
      */
@@ -32,5 +33,11 @@ public class RestClientConfig {
     @LoadBalanced
     RestClient.Builder loadBalancedRestClientBuilder() {
         return RestClient.builder();
+    }
+
+    @Bean
+    @LoadBalanced
+    WebClient.Builder loadBalancedWebClientBuilder() {
+        return WebClient.builder();
     }
 }
