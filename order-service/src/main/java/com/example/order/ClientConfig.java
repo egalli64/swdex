@@ -13,7 +13,7 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.reactive.function.client.WebClient;
 
 /**
- * Beans for RestClient.Builder
+ * Beans for Rest and Web Client.Builder
  */
 @Configuration
 public class ClientConfig {
@@ -35,6 +35,9 @@ public class ClientConfig {
         return RestClient.builder();
     }
 
+    /**
+     * Only load balanced WebClient is used in this application
+     */
     @Bean
     @LoadBalanced
     WebClient.Builder loadBalancedWebClientBuilder() {
