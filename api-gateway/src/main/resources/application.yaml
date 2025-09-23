@@ -17,6 +17,10 @@ spring:
               uri: lb://order-service
               predicates:
                 - Path=/api/orders/**
+            - id: reactive-order-service
+              uri: lb://reactive-order-service
+              predicates:
+                - Path=/api/reactive-orders/**
 
 eureka:
   client:
