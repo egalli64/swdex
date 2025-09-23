@@ -26,7 +26,7 @@
 		<module>api-gateway</module>
 		<module>user-service</module>
 		<module>order-service</module>
-		<module>product-service</module>
+		<module>reactive-order-service</module>
 	</modules>
 
 	<dependencyManagement>
