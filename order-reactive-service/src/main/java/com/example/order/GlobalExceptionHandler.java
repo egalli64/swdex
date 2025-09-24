@@ -24,7 +24,19 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Mono<Map<String, Object>> handleUserNotFound(UserNotFoundException ex) {
-        log.traceEntry("handleUserNotFound()");
+        log.traceEntry("handleUserNotFound({})", ex.getMessage());
+
+        Map<String, Object> error = Map.of( //
+                "error", "Not Found", //
+                "message", ex.getMessage(), //
+                "timestamp", LocalDateTime.now());
+        return Mono.just(error);
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Mono<Map<String, Object>> handleOrderNotFound(OrderNotFoundException ex) {
+        log.traceEntry("handleOrderNotFound()", ex.getMessage());
 
         Map<String, Object> error = Map.of( //
                 "error", "Not Found", //
@@ -36,7 +48,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ServiceUnavailableException.class)
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     public Mono<Map<String, Object>> handleServiceUnavailable(ServiceUnavailableException ex) {
-        log.traceEntry("handleServiceUnavailable()");
+        log.traceEntry("handleServiceUnavailable()", ex.getMessage());
 
         Map<String, Object> error = Map.of( //
                 "error", "Service Not Available", //
@@ -48,6 +60,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Mono<Map<String, Object>> handleGeneral(Exception ex) {
+        log.error("handleGeneral()", ex);
+
         Map<String, Object> error = Map.of( //
                 "error", "Internal Server Error", //
                 "message", "An unexpected error occurred", //
