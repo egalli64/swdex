@@ -8,6 +8,7 @@ package com.example.order;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -57,5 +59,18 @@ public class ReactiveOrderController {
         log.traceEntry("getOrderUserName({})", id);
 
         return svc.getUserName(id).switchIfEmpty(Mono.error(new OrderNotFoundException(id)));
+    }
+
+    /**
+     * Server-Sent Events (SSE) is used here. The response contains a stream of
+     * data. It is divided in chunks, where each chunk contains 1+ SSE, that, in our
+     * case, is an order.
+     * <pre>
+        curl -N http://localhost:8080/api/reactive-orders/stream
+     * </pre>
+     */
+    @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<ReactiveOrder> streamAllOrders() {
+        return svc.streamAll();
     }
 }
