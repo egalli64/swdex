@@ -5,6 +5,8 @@
  */
 package com.example.order;
 
+import java.time.Duration;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -75,5 +78,12 @@ public class ReactiveOrderService {
         log.traceEntry("clientGetUser({})", order);
 
         return client.get().uri(URI_USER_BY_ID, order.getUserId()).retrieve();
+    }
+
+    /**
+     * Simulate a slow-down in the pipeline, to show backpressure at work
+     */
+    public Flux<ReactiveOrder> streamAll() {
+        return repo.findAll().delayElements(Duration.ofMillis(500));
     }
 }
