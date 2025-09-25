@@ -5,8 +5,6 @@ spring:
   application:
     name: product-service
   cloud:
-    function:
-      definition: newProductEvent
     stream:
       bindings:
         newProductEvent-out-0:
