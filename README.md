@@ -4,12 +4,12 @@
 
 Modules
 - Eureka server - Discovery
-- API gateway
-- User service - A Eureka client
+- API gateway - Gateway
+- User service - Simple Eureka client
 - Order service - More advanced, but always synchronous, service communication techniques
 - Reactive order service - WebClient, reactive approach to non-blocking communication
-- Product service - RabbitMQ, Event-Driven approach to non-blocking communication (publisher)
-- Email service - RabbitMQ, Event-Driven approach to non-blocking communication (consumer)
+- Product service - RabbitMQ, event-driven approach to non-blocking communication (publisher)
+- Email service - RabbitMQ, event-driven approach to non-blocking communication (subscriber)
 
 ### RabbitMQ external dependency by Docker
 
