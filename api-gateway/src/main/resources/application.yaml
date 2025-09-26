@@ -1,3 +1,4 @@
+# By default server.port is 8080, but let's' make it explicit
 server:
   port: 8080
 
@@ -27,8 +28,8 @@ spring:
                 - Path=/api/products/**
 
 eureka:
-  client:
+  client: # required only if different from default URL
     service-url:
       defaultZone: http://localhost:8761/eureka/
-  instance:
+  instance: # useful in production to simplify deployment
     prefer-ip-address: true
