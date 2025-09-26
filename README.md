@@ -6,7 +6,7 @@ Modules
 - Eureka server - Discovery
 - API gateway - Gateway
 - User service - Simple Eureka client
-- Order service - More advanced, but always synchronous, service communication techniques
+- Order service - RestClient for blocking service communication techniques
 - Reactive order service - WebClient, reactive approach to non-blocking communication
 - Product service - RabbitMQ, event-driven approach to non-blocking communication (publisher)
 - Email service - RabbitMQ, event-driven approach to non-blocking communication (subscriber)
