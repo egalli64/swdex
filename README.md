@@ -10,6 +10,7 @@ Modules
 - Reactive order service - WebClient, reactive approach to non-blocking communication
 - Product service - RabbitMQ, event-driven approach to non-blocking communication (publisher)
 - Email service - RabbitMQ, event-driven approach to non-blocking communication (subscriber)
+- Inventory service - RabbitMQ, Pub/Sub vs Point-To-Point
 
 ### RabbitMQ external dependency by Docker
 
