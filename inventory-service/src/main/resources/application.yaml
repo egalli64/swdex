@@ -1,0 +1,18 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: inventory-service
+  cloud:
+    function:
+      definition: newProductEvent
+    stream:
+      bindings:
+        newProductEvent-in-0:
+          destination: product-events
+          # group: email-service-group # switch between Point-to-Point and Pub/Sub
+          binder: rabbit
+  rabbitmq:
+    host: localhost
+    port: 5672
