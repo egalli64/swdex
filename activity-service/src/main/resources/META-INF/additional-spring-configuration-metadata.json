@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "app.topic.activity-events",
+  "type": "java.lang.String",
+  "description": "Topic name for the activity events"
+}]}
