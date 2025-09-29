@@ -26,6 +26,10 @@ spring:
               uri: lb://product-service
               predicates:
                 - Path=/api/products/**
+            - id: activity-service
+              uri: lb://activity-service
+              predicates:
+                - Path=/api/activities/**
 
 eureka:
   client: # required only if different from default URL
