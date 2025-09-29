@@ -3,7 +3,11 @@
 # https://github.com/egalli64/spring-microservices
 
 # To start the cluster: docker compose up -d
-# To stop it:           docker compose down
+# To stop it [-v]:      docker compose down
+# Process status:       docker compose ps -a
+# Log [-f]:             docker logs kafka
+# Enter a bash shell:   docker exec -it kafka bash
+#   Topic list:         kafka-topics --bootstrap-server localhost:9092 --list
 
 services:
   kafka:
