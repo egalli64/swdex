@@ -4,4 +4,4 @@
 target/
 
 # Kafka
-/data/
+data/
