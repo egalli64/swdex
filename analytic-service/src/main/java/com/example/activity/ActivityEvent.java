@@ -3,7 +3,7 @@
  * 
  * https://github.com/egalli64/spring-microservices
  */
-package com.example.analytic;
+package com.example.activity;
 
 import java.time.Instant;
 
