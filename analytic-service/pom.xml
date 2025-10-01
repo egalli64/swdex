@@ -11,7 +11,7 @@
 
     <artifactId>analytic-service</artifactId>
     <packaging>jar</packaging>
-    <name>Activity Service</name>
+    <name>Analytic Service</name>
 
     <dependencies>
         <dependency>
