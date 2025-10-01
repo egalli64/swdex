@@ -12,10 +12,14 @@ import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Materialized;
 import org.apache.kafka.streams.kstream.TimeWindows;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
 import org.springframework.kafka.config.StreamsBuilderFactoryBeanConfigurer;
+
+import com.example.activity.ActivityEvent;
 
 /**
  * To check the count topic
@@ -29,15 +33,21 @@ import org.springframework.kafka.config.StreamsBuilderFactoryBeanConfigurer;
 @Configuration
 @EnableKafkaStreams
 public class ActivityStreamConfig {
+    private static final Logger log = LogManager.getLogger(ActivityStreamConfig.class);
+
     @Bean
     StreamsBuilderFactoryBeanConfigurer configurer() {
+        log.traceEntry("configurer()");
+
         return fb -> fb.setStateListener((newState, oldState) -> {
-            System.out.println("State transition from " + oldState + " to " + newState);
+            log.debug("State transition from " + oldState + " to " + newState);
         });
     }
 
     @Bean
     KStream<String, ActivityEvent> activityStream(StreamsBuilder builder) {
+        log.traceEntry("activityStream()");
+
         KStream<String, ActivityEvent> stream = builder.stream("activity.events");
 
         stream.groupByKey().windowedBy(TimeWindows.ofSizeWithNoGrace(Duration.ofMinutes(5))) //

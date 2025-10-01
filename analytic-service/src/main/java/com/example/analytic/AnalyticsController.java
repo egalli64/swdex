@@ -16,6 +16,8 @@ import org.apache.kafka.streams.StoreQueryParameters;
 import org.apache.kafka.streams.state.QueryableStoreTypes;
 import org.apache.kafka.streams.state.ReadOnlyWindowStore;
 import org.apache.kafka.streams.state.WindowStoreIterator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.kafka.config.StreamsBuilderFactoryBean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/analytics")
 public class AnalyticsController {
+    private static final Logger log = LogManager.getLogger(AnalyticsController.class);
 
     private final StreamsBuilderFactoryBean factoryBean;
 
@@ -39,6 +42,7 @@ public class AnalyticsController {
      */
     @GetMapping("/users/{userId}/activity")
     public List<UserActivityCount> getUserActivity(@PathVariable String userId) {
+        log.traceEntry("getUserActivity({})", userId);
         KafkaStreams streams = factoryBean.getKafkaStreams();
         ReadOnlyWindowStore<String, Long> store = streams
                 .store(StoreQueryParameters.fromNameAndType("user-activity-counts", QueryableStoreTypes.windowStore()));
