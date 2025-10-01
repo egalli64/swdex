@@ -39,7 +39,7 @@ public class ActivityController {
     /**
      * <pre>
         curl -X POST http://localhost:8080/api/activities/record -H "Content-Type: application/json" ^
-         -d "{ \"userId\": \"user-B\", \"type\": \"LOGIN\", \"itemId\": \"app-entry\"}"
+         -d "{ \"userId\": \"user-1\", \"type\": \"CLICK\", \"itemId\": \"item-C\"}"
      * </pre>
      */
     @PostMapping("/record")
@@ -59,7 +59,7 @@ public class ActivityController {
     public ResponseEntity<String> test(@RequestParam(defaultValue = "100") int count) {
         log.trace("test({})", count);
 
-        String[] users = { "user1", "user2", "user3", "user4", "user5" };
+        String[] users = { "user-1", "user-2", "user-3", "user-4", "user-5" };
         String[] types = { "VIEW", "CLICK", "PURCHASE", "LIKE", "SHARE" };
         String[] items = { "item-A", "item-B", "item-C", "item-D", "item-E" };
 
