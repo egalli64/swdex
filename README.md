@@ -12,7 +12,8 @@ Modules
 - Email service - RabbitMQ, event-driven approach to non-blocking communication (subscriber)
 - Inventory service - RabbitMQ, Pub/Sub vs Point-To-Point
 - Activity service - Kafka, event streaming approach (producer)
-- Analytic service - Kafka (consumer)
+- Audit service - Kafka (consumer - replayability)
+- Analytic service - Kafka (consumer - aggregation - stream processing)
 
 ### RabbitMQ external dependency by Docker
 
