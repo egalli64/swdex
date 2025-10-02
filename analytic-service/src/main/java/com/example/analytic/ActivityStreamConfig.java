@@ -17,7 +17,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
-import org.springframework.kafka.config.StreamsBuilderFactoryBeanConfigurer;
 
 import com.example.activity.ActivityEvent;
 
@@ -34,15 +33,6 @@ import com.example.activity.ActivityEvent;
 @EnableKafkaStreams
 public class ActivityStreamConfig {
     private static final Logger log = LogManager.getLogger(ActivityStreamConfig.class);
-
-    @Bean
-    StreamsBuilderFactoryBeanConfigurer configurer() {
-        log.traceEntry("configurer()");
-
-        return fb -> fb.setStateListener((newState, oldState) -> {
-            log.debug("State transition from " + oldState + " to " + newState);
-        });
-    }
 
     @Bean
     KStream<String, ActivityEvent> activityStream(StreamsBuilder builder) {
