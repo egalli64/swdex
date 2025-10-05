@@ -1,0 +1,45 @@
+# By default server.port is 8080, but let's' make it explicit
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: lb://user-service
+              predicates:
+                - Path=/api/users/**
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/api/orders/**
+            - id: reactive-order-service
+              uri: lb://reactive-order-service
+              predicates:
+                - Path=/api/reactive-orders/**
+            - id: product-service
+              uri: lb://product-service
+              predicates:
+                - Path=/api/products/**
+            - id: activity-service
+              uri: lb://activity-service
+              predicates:
+                - Path=/api/activities/**
+            - id: analytic-service
+              uri: lb://analytic-service
+              predicates:
+                - Path=/api/analytics/**
+            - id: audit-service
+              uri: lb://audit-service
+              predicates:
+                - Path=/api/audits/**
+
+eureka:
+  client: # required only if different from default URL
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance: # useful in production to simplify deployment
+    prefer-ip-address: true
