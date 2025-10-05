@@ -17,3 +17,8 @@ spring:
         # git:
         #  uri: https://github.com/<ORG>/<CONFIG-REPO>
         #  default-label: main
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
