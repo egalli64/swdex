@@ -1,0 +1,18 @@
+server:
+  port: 8087
+
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+app:
+  topic:
+    activity-events: activity.events
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
