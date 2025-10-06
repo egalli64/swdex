@@ -1,20 +1,5 @@
-server:
-  port: 8084
-
 spring:
   application:
     name: product-service
-  cloud:
-    stream:
-      bindings:
-        newProductEvent-out-0:
-          destination: product-events
-          binder: rabbit
-  rabbitmq:
-    host: localhost
-    port: 5672		
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+  config:
+    import: optional:configserver:http://localhost:8888
