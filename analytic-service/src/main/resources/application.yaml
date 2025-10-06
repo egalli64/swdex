@@ -1,15 +1,5 @@
-server:
-  port: 8088
-
 spring:
   application:
     name: analytic-service
-  kafka:
-    bootstrap-servers: localhost:9092
-    streams:
-      application-id: analytic-service
-      state-dir: ./data/kafka-streams-state
-      properties:
-        "[default.key.serde]": org.apache.kafka.common.serialization.Serdes$StringSerde
-        "[default.value.serde]": org.springframework.kafka.support.serializer.JsonSerde
-        "[spring.json.trusted.packages]": "*"
+  config:
+    import: optional:configserver:http://localhost:8888
