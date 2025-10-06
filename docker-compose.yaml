@@ -35,7 +35,7 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
     volumes:
-      - ./data/kafka:/var/lib/kafka/data
+      - kafka-data:/var/lib/kafka/data
 
   schema-registry:
     image: confluentinc/cp-schema-registry:7.5.0
@@ -82,3 +82,6 @@ services:
       CONNECT_INTERNAL_KEY_CONVERTER_SCHEMAS_ENABLE: 'false'
       CONNECT_INTERNAL_VALUE_CONVERTER_SCHEMAS_ENABLE: 'false'
       CONNECT_PLUGIN_PATH: "/usr/share/java"
+
+volumes:
+  kafka-data:
