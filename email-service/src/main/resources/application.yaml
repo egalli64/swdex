@@ -1,18 +1,5 @@
-server:
-  port: 8085
-
 spring:
   application:
     name: email-service
-  cloud:
-    function:
-      definition: newProductEvent
-    stream:
-      bindings:
-        newProductEvent-in-0:
-          destination: product-events
-          # group: email-service-group # switch between Point-to-Point and Pub/Sub
-          binder: rabbit
-  rabbitmq:
-    host: localhost
-    port: 5672
+  config:
+    import: optional:configserver:http://localhost:8888
