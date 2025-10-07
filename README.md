@@ -7,6 +7,7 @@ Modules
 - API gateway - Gateway
 - User service - Simple Eureka client
 - Order service - RestClient for blocking service communication techniques
+- Random service - Simple Dockerized RestClient
 - Reactive order service - WebClient, reactive approach to non-blocking communication
 - Product service - RabbitMQ, event-driven approach to non-blocking communication (publisher)
 - Email service - RabbitMQ, event-driven approach to non-blocking communication (subscriber)
@@ -24,12 +25,13 @@ Modules
 ## Startup
 - Start Docker Desktop (if on Windows/MacOS)
 - Start RabbitMQ: docker start rabbitmq
-- Start Kafka: docker compose up -d
+- Start Kafka: docker compose up -d (in the repository root)
 - Start the Spring Services:
     - eureka-server
     - config-server
     - api-gateway
     - then all the other services
+      - the dockerized one should start in Docker!
     
 ## Shutdown
 - Stop the services
