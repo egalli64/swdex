@@ -16,6 +16,10 @@ spring:
               uri: lb://order-service
               predicates:
                 - Path=/api/orders/**
+            - id: random-service
+              uri: lb://random-service
+              predicates:
+                - Path=/api/random/**
             - id: reactive-order-service
               uri: lb://reactive-order-service
               predicates:
@@ -41,5 +45,6 @@ eureka:
   client: # required only if different from default URL
     service-url:
       defaultZone: http://localhost:8761/eureka/
-  instance: # useful in production to simplify deployment
-    prefer-ip-address: true
+# useful in production to simplify deployment
+#  instance: 
+#    prefer-ip-address: true
