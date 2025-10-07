@@ -29,10 +29,9 @@ Modules
 - Start the Spring Services:
     - eureka-server
     - config-server
+    - all the services _(the dockerized ones should start in Docker!)_
     - api-gateway
-    - then all the other services
-      - the dockerized one should start in Docker!
-    
+
 ## Shutdown
 - Stop the services
 - Stop Kafka: docker compose down
