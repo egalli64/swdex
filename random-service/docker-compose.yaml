@@ -1,0 +1,23 @@
+# First time / After code changes and running mvnw clean package -DskipTests
+# docker compose up --build
+#
+# Shutdown
+# docker compose down
+#
+# Variations
+# docker compose up -d
+# docker compose up --scale random-service=3
+
+services:
+  random-service:
+    build: .
+    container_name: random-service
+    ports:
+      - "8182:8182"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - CONFIG_SERVER_URL=http://host.docker.internal:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://host.docker.internal:8761/eureka/
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=false
+      - EUREKA_INSTANCE_HOSTNAME=localhost
+#      - LOGGING_LEVEL_ROOT=DEBUG
