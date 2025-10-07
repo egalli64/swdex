@@ -26,6 +26,7 @@
         <module>eureka-server</module>
         <module>api-gateway</module>
         <module>user-service</module>
+        <module>random-service</module>
         <module>order-service</module>
         <module>reactive-order-service</module>
         <module>product-service</module>
@@ -66,7 +67,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.14.0</version>
+                    <version>3.14.1</version>
                     <configuration>
                         <compilerArgs>
                             <arg>-parameters</arg>
