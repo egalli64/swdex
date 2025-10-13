@@ -40,6 +40,10 @@ spring:
               uri: lb://audit-service
               predicates:
                 - Path=/api/audits/**
+            - id: resilient-order-service
+              uri: lb://resilient-order-service
+              predicates:
+                - Path=/api/resilient-orders/**
 
 eureka:
   client: # required only if different from default URL
