@@ -10,7 +10,7 @@ server:
 resilience4j:
   retry:
     instances:
-      inventoryService:
+      userService:
         max-attempts: 3
         wait-duration: 500ms
         enable-exponential-backoff: true
