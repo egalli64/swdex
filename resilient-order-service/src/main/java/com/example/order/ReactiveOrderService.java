@@ -16,14 +16,14 @@ import io.github.resilience4j.retry.RetryRegistry;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ResilientOrderService {
-    private static final Logger log = LogManager.getLogger(ResilientOrderService.class);
-    private static final String URI_USER_BY_ID = "http://user-service/api/users/{id}";
+public class ReactiveOrderService {
+    private static final Logger log = LogManager.getLogger(ReactiveOrderService.class);
+    private static final String GET_USER_BY_ID = "http://user-service/api/users/{id}";
 
     private final WebClient web;
     private final Retry retry;
 
-    public ResilientOrderService(WebClient web, RetryRegistry registry) {
+    public ReactiveOrderService(WebClient web, RetryRegistry registry) {
         this.web = web;
         this.retry = registry.retry("userService");
     }
@@ -31,7 +31,8 @@ public class ResilientOrderService {
     public Mono<UserDTO> getUser(Long id) {
         log.traceEntry("getUser({})", id);
 
-        return web.get().uri(URI_USER_BY_ID, id).retrieve().bodyToMono(UserDTO.class).transformDeferred(RetryOperator.of(retry))
+        return web.get().uri(GET_USER_BY_ID, id).retrieve().bodyToMono(UserDTO.class)
+                .transformDeferred(RetryOperator.of(retry))
                 .doOnError(ex -> log.error("Failed to check user service after retries: {}", ex.getMessage()));
     }
 }
