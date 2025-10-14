@@ -15,27 +15,27 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 /**
- * Using a WebClient in a resilient
+ * Using a WebClient in resilient way
  */
 @RestController
-@RequestMapping("/api/resilient-orders")
-public class ResilientOrderController {
-    private static Logger log = LogManager.getLogger(ResilientOrderController.class);
+@RequestMapping("/api/resilient-orders/reactive")
+public class ReactiveOrderController {
+    private static Logger log = LogManager.getLogger(ReactiveOrderController.class);
 
-    private final ResilientOrderService svc;
+    private final ReactiveOrderService svc;
 
-    public ResilientOrderController(ResilientOrderService svc) {
-        this.svc = svc;
+    public ReactiveOrderController(ReactiveOrderService reactiveSvc) {
+        this.svc = reactiveSvc;
     }
 
     /**
      * <pre>
-        curl -i -X GET http://localhost:8080/api/resilient-orders/1/user
+        curl -i -X GET http://localhost:8080/api/resilient-orders/reactive/1/user
      * </pre>
      */
     @GetMapping("/{id}/user")
-    public Mono<UserDTO> getOrderUser(@PathVariable Long id) {
-        log.traceEntry("getOrderUser({})", id);
+    public Mono<UserDTO> getOrderUserReactive(@PathVariable Long id) {
+        log.traceEntry("getOrderUserReactive({})", id);
 
         return svc.getUser(id).switchIfEmpty(Mono.error(new UserNotFoundException(id)));
     }
