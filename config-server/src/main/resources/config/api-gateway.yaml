@@ -44,6 +44,10 @@ spring:
               uri: lb://resilient-order-service
               predicates:
                 - Path=/api/resilient-orders/**
+            - id: breaker-order-service
+              uri: lb://breaker-order-service
+              predicates:
+                - Path=/api/breaker-orders/**
 
 eureka:
   client: # required only if different from default URL
