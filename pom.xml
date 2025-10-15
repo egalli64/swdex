@@ -41,6 +41,7 @@
         <module>audit-service</module>
         <module>analytic-service</module>
         <module>resilient-order-service</module>
+        <module>breaker-order-service</module>
     </modules>
 
     <dependencyManagement>
