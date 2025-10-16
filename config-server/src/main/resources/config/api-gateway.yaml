@@ -48,6 +48,10 @@ spring:
               uri: lb://breaker-order-service
               predicates:
                 - Path=/api/breaker-orders/**
+            - id: fallback-order-service
+              uri: lb://fallback-order-service
+              predicates:
+                - Path=/api/fallback-orders/**
 
 eureka:
   client: # required only if different from default URL
