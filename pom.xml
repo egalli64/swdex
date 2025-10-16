@@ -2,7 +2,7 @@
 <!--
     Spring Boot Microservices tutorial
     
-    https://github.com/egalli64/spring-microservices    
+    https://github.com/egalli64/spring-microservices
  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -42,6 +42,7 @@
         <module>analytic-service</module>
         <module>resilient-order-service</module>
         <module>breaker-order-service</module>
+        <module>fallback-order-service</module>
     </modules>
 
     <dependencyManagement>
