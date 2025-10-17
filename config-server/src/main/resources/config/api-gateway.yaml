@@ -52,6 +52,10 @@ spring:
               uri: lb://fallback-order-service
               predicates:
                 - Path=/api/fallback-orders/**
+            - id: bulkhead-order-service
+              uri: lb://bulkhead-order-service
+              predicates:
+                - Path=/api/bulkhead-orders/**
 
 eureka:
   client: # required only if different from default URL
