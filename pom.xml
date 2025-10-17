@@ -43,6 +43,7 @@
         <module>resilient-order-service</module>
         <module>breaker-order-service</module>
         <module>fallback-order-service</module>
+        <module>bulkhead-order-service</module>
     </modules>
 
     <dependencyManagement>
