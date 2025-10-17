@@ -15,6 +15,10 @@ Modules
 - Activity service - Kafka, event streaming approach (producer)
 - Audit service - Kafka (consumer - replayability)
 - Analytic service - Kafka (consumer - aggregation - stream processing)
+- Resilient order service - Resilience4j (timeout and retry)
+- Breaker order service - Resilience4j (add fail fast by circuit breaker)
+- Fallback order service - Resilience4j (add fallback strategy)
+- Bulkhead order service - Resilience4j (add bulkhead support)
 
 ## Requirements
 - Docker
