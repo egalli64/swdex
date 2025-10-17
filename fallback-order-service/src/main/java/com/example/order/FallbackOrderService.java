@@ -1,6 +1,6 @@
 /*
  * Spring Boot Microservices tutorial - Fallback Order Service
- * 
+ *
  * https://github.com/egalli64/spring-microservices
  */
 package com.example.order;
@@ -63,7 +63,7 @@ public class FallbackOrderService {
         }
 
         return Mono.justOrEmpty(cache.get(id))
-                .switchIfEmpty(Mono.just(new UserDTO(null, GET_USER_BY_ID, GET_USER_BY_ID)))
+                .switchIfEmpty(Mono.just(new UserDTO(id, "User Unknown", "anonymous@example.com")))
                 .doOnNext(_ -> log.info("Returning fallback user w/ id " + id));
     }
 }
