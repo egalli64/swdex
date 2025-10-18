@@ -44,6 +44,7 @@
         <module>breaker-order-service</module>
         <module>fallback-order-service</module>
         <module>bulkhead-order-service</module>
+        <module>referesh-user-service</module>
     </modules>
 
     <dependencyManagement>
