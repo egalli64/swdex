@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: tracing-user-service
+  config:
+    import: optional:configserver:http://localhost:8888

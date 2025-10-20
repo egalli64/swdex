@@ -1,0 +1,19 @@
+server:
+  port: 8381
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0  # 100% NOT FOR PRODUCTION !!!
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+      
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
