@@ -27,12 +27,13 @@
     </properties>
 
     <modules>
-        <module>config-server</module>
         <module>eureka-server</module>
-        <module>api-gateway</module>
         <module>user-service</module>
-        <module>random-service</module>
+        <module>config-server</module>
+        <module>api-gateway</module>
         <module>order-service</module>
+        <module>random-service</module>
+        <module>referesh-user-service</module>
         <module>reactive-order-service</module>
         <module>product-service</module>
         <module>email-service</module>
@@ -44,7 +45,6 @@
         <module>breaker-order-service</module>
         <module>fallback-order-service</module>
         <module>bulkhead-order-service</module>
-        <module>referesh-user-service</module>
     </modules>
 
     <dependencyManagement>

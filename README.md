@@ -4,21 +4,23 @@
 
 Modules
 - Eureka server - Discovery
-- API gateway - Gateway
 - User service - Simple Eureka client
+- Config server - Configuration
+- API gateway - Gateway
 - Order service - RestClient for blocking service communication techniques
 - Random service - Simple Dockerized RestClient
-- Reactive order service - WebClient, reactive approach to non-blocking communication
+- Refresh User service - Dynamic configuration with @RefreshScope
+- Reactive Order service - WebClient, reactive approach to non-blocking communication
 - Product service - RabbitMQ, event-driven approach to non-blocking communication (publisher)
 - Email service - RabbitMQ, event-driven approach to non-blocking communication (subscriber)
 - Inventory service - RabbitMQ, Pub/Sub vs Point-To-Point
 - Activity service - Kafka, event streaming approach (producer)
 - Audit service - Kafka (consumer - replayability)
 - Analytic service - Kafka (consumer - aggregation - stream processing)
-- Resilient order service - Resilience4j (timeout and retry)
-- Breaker order service - Resilience4j (add fail fast by circuit breaker)
-- Fallback order service - Resilience4j (add fallback strategy)
-- Bulkhead order service - Resilience4j (add bulkhead support)
+- Resilient Order service - Resilience4j (timeout and retry)
+- Breaker Order service - Resilience4j (add fail fast by circuit breaker)
+- Fallback Order service - Resilience4j (add fallback strategy)
+- Bulkhead Order service - Resilience4j (add bulkhead support)
 
 ## Requirements
 - Docker
