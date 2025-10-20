@@ -17,7 +17,7 @@
 
     <artifactId>tracing-user-service</artifactId>
     <packaging>jar</packaging>
-    <name>User Service</name>
+    <name>Tracing User Service</name>
 
     <dependencies>
         <dependency>
