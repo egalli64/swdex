@@ -21,12 +21,15 @@ Modules
 - Breaker Order service - Resilience4j (add fail fast by circuit breaker)
 - Fallback Order service - Resilience4j (add fallback strategy)
 - Bulkhead Order service - Resilience4j (add bulkhead support)
+- Tracing User service - Micrometer Tracing
+- Tracing Order service - Micrometer Tracing and Zipkin
 
 ## Requirements
 - Docker
 - RabbitMQ: docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
 - Kafka: docker run --rm confluentinc/cp-kafka:7.5.0 kafka-storage random-uuid
     - See docker-compose.yaml for details
+- Zipkin: docker run -d --name zipkin -p 9411:9411 openzipkin/zipkin
 
 ## Startup
 - Start Docker Desktop (if on Windows/MacOS)
@@ -41,5 +44,5 @@ Modules
 ## Shutdown
 - Stop the services
 - Stop Kafka: docker compose down
-- Stop RabbitMQ: docker stop rabbitmq
+- Stop RabbitMQ and Zipkin: docker stop <name>
 - Stop Docker Desktop
