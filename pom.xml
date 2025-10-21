@@ -46,6 +46,7 @@
         <module>fallback-order-service</module>
         <module>bulkhead-order-service</module>
         <module>tracing-user-service</module>
+        <module>tracing-order-service</module>
     </modules>
 
     <dependencyManagement>
