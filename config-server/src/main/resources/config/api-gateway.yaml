@@ -64,6 +64,10 @@ spring:
               uri: lb://tracing-user-service
               predicates:
                 - Path=/api/tracing-users/**
+            - id: tracing-order-service
+              uri: lb://tracing-order-service
+              predicates:
+                - Path=/api/tracing-orders/**
 
 eureka:
   client: # required only if different from default URL
