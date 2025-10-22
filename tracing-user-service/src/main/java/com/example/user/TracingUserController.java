@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import reactor.core.publisher.Mono;
+
 @RestController
 @RequestMapping("/api/tracing-users")
 public class TracingUserController {
@@ -24,12 +26,13 @@ public class TracingUserController {
      * </pre>
      */
     @GetMapping()
-    public int getUserInfo() {
+    public Mono<Integer> getUserInfo() {
         log.traceEntry("getUserInfo()");
-        
+
+        // mocking a call to a service that does some interesting job
         int info = ThreadLocalRandom.current().nextInt(100);
         log.info("Mock info generated: " + info);
-        
-        return info;
+
+        return Mono.just(info);
     }
 }
