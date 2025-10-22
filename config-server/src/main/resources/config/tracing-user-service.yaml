@@ -9,6 +9,10 @@ management:
     tracing:
       endpoint: http://localhost:9411/api/v2/spans
 
+spring:
+  reactor:
+    context-propagation: auto
+
 logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
