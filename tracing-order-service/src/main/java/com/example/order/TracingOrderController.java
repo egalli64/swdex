@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import reactor.core.publisher.Mono;
+
 @RestController
 @RequestMapping("/api/tracing-orders")
 public class TracingOrderController {
@@ -30,15 +32,13 @@ public class TracingOrderController {
      * </pre>
      */
     @GetMapping()
-    public int getOrderInfo() {
-        log.traceEntry("getOrderInfo()");
+    public Mono<Integer> getOrderInfo() {
+        log.trace("Enter getOrderInfo()");
 
         int orderInfo = ThreadLocalRandom.current().nextInt(100);
-        log.info("Mock info generated: " + orderInfo);
+        log.info("Mock info generated: {}", orderInfo);
 
-        int userInfo = svc.getUserInfo();
-        log.info("Mock user info fetched: " + userInfo);
-
-        return orderInfo + userInfo;
+        return svc.getUserInfo().doOnNext(userInfo -> log.info("Mock user info fetched: {}", userInfo))
+                .map(userInfo -> orderInfo + userInfo);
     }
 }
