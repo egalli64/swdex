@@ -8,7 +8,9 @@ package com.example.order;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import reactor.core.publisher.Mono;
 
 @Service
 public class TracingOrderService {
@@ -16,20 +18,16 @@ public class TracingOrderService {
     private static final String REQUEST_URI = "/api/tracing-users";
     private static final Logger log = LogManager.getLogger(TracingOrderService.class);
 
-    private final RestClient client;
+    private final WebClient client;
 
-    public TracingOrderService(RestClient.Builder builder) {
+    public TracingOrderService(WebClient.Builder builder) {
         this.client = builder.baseUrl(USER_SVC_URL).build();
     }
 
-    public int getUserInfo() {
-        log.traceEntry("getUserInfo()");
+    public Mono<Integer> getUserInfo() {
+        log.trace("Enter getUserInfo()");
 
-        try {
-            return client.get().uri(REQUEST_URI).retrieve().body(Integer.class);
-        } catch (Exception ex) {
-            log.error("Can't get user info", ex);
-            return 0;
-        }
+        return client.get().uri(REQUEST_URI).retrieve().bodyToMono(Integer.class)
+                .doOnError(ex -> log.error("Can't get user info", ex)).onErrorReturn(0);
     }
 }
